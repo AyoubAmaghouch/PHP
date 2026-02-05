@@ -4,10 +4,14 @@ function saluer() {
 }
 saluer();
 
+
+
 function addition($a, $b) {
     return $a + $b;
 }
 echo "Somme : " . addition(5, 10);
+
+
 
 function bienvenue($nom = "visiteur") {
     echo "Bienvenue " . $nom;
@@ -15,6 +19,8 @@ function bienvenue($nom = "visiteur") {
 bienvenue(); // Affiche "Bienvenue visiteur"
 
 $compteur = 0;
+
+
 
 function incrementer() {
     static $compteur = 0;
