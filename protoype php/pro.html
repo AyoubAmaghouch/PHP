@@ -1,50 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moyenne Étudiant</title>
     <link rel="stylesheet" href="pro.css">
-    <title>prototype</title>
 </head>
 <body>
-    
-  <header>
-    <h1>Calculateur de Notes</h1>
-    <p>Entrez le nom et les notes de l'étudiant</p>
-  </header>
 
+<div class="box">
+    <h2>Calcul Moyenne</h2>
 
-<main>
-
-<form action="pro.php" method="POST">
-   <label for="nom"> nom :</label>
-    <input type="text" name="nom" id="nom" placeholder="nom...">
-
-    <label for="note1"> note1 :</label>
-    <input type="number" name="note1" id="note1" placeholder="note1...">
-
-    <label for="note2"> note2 :</label>
-    <input type="number" name="note2" id="note2" placeholder="note2...">
-
-    <label for="note3"> note3 :</label>
-    <input type="number" name="note3" id="note3" placeholder="note3...">
-
-    <button type="submit">submit</button>
-</form>
-
-</main>
-
-
-  <footer>
-     &copy; 2026 Calculateur de Notes. Tous droits réservés.
-  </footer>
-
-
-
-
-
-
-
+    <form action="pro.php" method="POST">
+        <input type="text" name="nom" placeholder="Nom"><br>
+        <input type="number" name="note1" placeholder="Note 1"><br>
+        <input type="number" name="note2" placeholder="Note 2"><br>
+        <input type="number" name="note3" placeholder="Note 3"><br>
+        <button type="submit">Calculer</button>
+    </form>
+</div>
 
 </body>
 </html>

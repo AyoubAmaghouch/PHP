@@ -1,112 +1,51 @@
 <?php
-
-if($_SERVER['REQUEST_METHOD']=='POST'){
-
-  //Trim spaces
-
-$nom =  trim($_POST['nom']);
-$note1 = trim($_POST['note1']);
-$note2 =  trim($_POST['note2']);
-$note3 = trim($_POST['note3']);
-
-// Store the marks in an array
-$notes = [$note1 , $note2 , $note3];
-
-
-// Check if any field is empty
-
-if(empty($nom) || empty($note1) || empty($note2) || empty($note3)){
-
-  echo 'Please fill in all fields';
-
-}
-
-
-// Check if any of the marks is invalid (not between 0 and 20)
-
-
-foreach($notes as $note){
-
-if($note < 0 || $note >20){
-    echo '  One of the marks is invalid '.'<br>' ; 
- } 
-}
-
-
-// Calculate the average of the marks in the array
 function calculerMoyenne($notes) {
-  $summe = array_sum($notes);
-  $moyenne = $summe / count($notes);
-  return $moyenne;
+    return array_sum($notes) / count($notes);
 }
 
+function getMention($moyenne) {
+    if ($moyenne >= 16) return "Très Bien";
+    elseif ($moyenne >= 14) return "Bien";
+    elseif ($moyenne >= 12) return "Assez Bien";
+    elseif ($moyenne >= 10) return "Passable";
+    elseif ($moyenne >= 7) return "rattrapage" ;
+    else return "domage";
+}
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-// Function to display the student's details and the corresponding mention based on the average
-
- function getMention($moyenne) {
-
-    global $nom;
-    global $note1;
-    global $note2;
-    global $note3;
-
-// Display the student's name and marks
-
-    echo 'le nom :'.' '.$nom.'<br>';
-    echo 'note1 :'.' '.$note1.'<br>';
-    echo 'note2 :' .' '.$note2.'<br>';
-    echo 'note3 :' .' '.$note3.'<br>';
-    echo 'moyenne :'.' '.$moyenne .'<br>';
-   
-   
-    // Display the mention according to the average
-
-    if($moyenne < 10){
-        echo 'You failed';
-    } elseif($moyenne < 14){
-        echo 'Pass';
-    } elseif($moyenne < 17){
-        echo 'Good';
-    } else {
-        echo 'Very Good';
+    if (
+        empty($_POST['nom']) ||
+        empty($_POST['note1']) ||
+        empty($_POST['note2']) ||
+        empty($_POST['note3'])
+    ) {
+        echo "<p class='error'>Tous les champs sont obligatoires.</p>";
+        exit;
     }
 
+    $nom = trim($_POST['nom']);
+    $notes = [
+        trim($_POST['note1']),
+        trim($_POST['note2']),
+        trim($_POST['note3'])
+    ];
 
+    foreach ($notes as $n) {
+        if (!is_numeric($n) || $n < 0 || $n > 20) {
+            echo "<p class='error'>Les notes doivent être entre 0 et 20.</p>";
+            exit;
+        }
+    }
+
+    $moyenne = calculerMoyenne($notes);
+    $mention = getMention($moyenne);
+
+    echo "<link rel='stylesheet' href='pro.css'>";
+    echo "<div class='box result'>";
+    echo "Étudiant: <b>$nom</b><br>";
+    echo "Moyenne: " . round($moyenne, 2) . "<br>";
+    echo "Mention: <b>$mention</b>";
+    echo "</div>";
 }
-// Calculate the average using the calculerMoyenne function
-
-$moyenne = calculerMoyenne($notes);
-
-// Call getMention to display the results
-
-getMention($moyenne);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
