@@ -1,11 +1,8 @@
 <?php
 
 
-$nom = $_POST['nom'];
-$note1 = $_POST['note1'];
-$note2 = $_POST['note2'];
-$note3 = $_POST['note3'];
-function calculerMoyenne($notes) { // VARIABLE 
+function calculerMoyenne($notes) { 
+
     return array_sum($notes) / count($notes);
 }
 
@@ -19,6 +16,14 @@ function getMention($moyenne) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
+//champ VARIABLE 
+$nom = $_POST['nom'];
+$note1 = $_POST['note1'];
+$note2 = $_POST['note2'];
+$note3 = $_POST['note3'];
+
+
 
     if ($nom === "" || $note1 === "" || $note2 === "" || $note3 === "")
      {
@@ -33,12 +38,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         trim($_POST['note3'])
     ];
 
-    foreach ($notes as $n) {
-        if (!is_numeric($n) || $n < 0 || $n > 20) {
-            echo "<p class='error'>Les notes doivent être entre 0 et 20.</p>";
-            exit;
-        }
+  for ($i = 0; $i < count($notes); $i++) {
+    $n = $notes[$i];
+    if (!is_numeric($n) || $n < 0 || $n > 20) {
+        echo "<p class='error'>Les notes doivent être entre 0 et 20.</p>";
+        exit;
     }
+}
 
     $moyenne = calculerMoyenne($notes);
     $mention = getMention($moyenne);
