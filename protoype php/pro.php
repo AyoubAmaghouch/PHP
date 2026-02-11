@@ -1,5 +1,11 @@
 <?php
-function calculerMoyenne($notes) {
+
+
+$nom = $_POST['nom'];
+$note1 = $_POST['note1'];
+$note2 = $_POST['note2'];
+$note3 = $_POST['note3'];
+function calculerMoyenne($notes) { // VARIABLE 
     return array_sum($notes) / count($notes);
 }
 
@@ -14,12 +20,8 @@ function getMention($moyenne) {
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    if (
-        empty($_POST['nom']) ||
-        empty($_POST['note1']) ||
-        empty($_POST['note2']) ||
-        empty($_POST['note3'])
-    ) {
+    if ($nom === "" || $note1 === "" || $note2 === "" || $note3 === "")
+     {
         echo "<p class='error'>Tous les champs sont obligatoires.</p>";
         exit;
     }
